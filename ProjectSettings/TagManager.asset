@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: WalkableGround
+    uniqueID: 2441865641
+    locked: 0
+  - name: Player
+    uniqueID: 4288104089
+    locked: 0
