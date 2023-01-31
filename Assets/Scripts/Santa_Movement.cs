@@ -11,6 +11,8 @@ public class Santa_Movement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     private float dirX = 0f;
     private float dirY = 0f;
+    private Vector2 PlayerInput;
+    private Vector2 movement;
 
     void Start()
     {
@@ -26,7 +28,9 @@ public class Santa_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(dirX * moveSpeed, dirY * moveSpeed);
+        PlayerInput = new Vector2(dirX, dirY).normalized;
+        movement = PlayerInput * moveSpeed;
+        rb.velocity = movement;
 
         if (dirX != 0f || dirY != 0f)
         {
