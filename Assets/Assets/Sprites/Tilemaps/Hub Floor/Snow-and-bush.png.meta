@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1424,9 +1424,9 @@ TextureImporter:
       Snow-and-bush_55: -1339620239
       Snow-and-bush_59: -1387099772
       Snow-and-bush_18: 116432348
+      Snow-and-bush_34: -1204481251
       Snow-and-bush_9: 909015143
       Snow-and-bush_48: 445558387
-      Snow-and-bush_34: -1204481251
       Snow-and-bush_22: 387449742
       Snow-and-bush_10: -2089717644
       Snow-and-bush_39: 686679236
