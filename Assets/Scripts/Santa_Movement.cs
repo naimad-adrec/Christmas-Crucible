@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey;
+using CodeMonkey.Utils;
 
 public class Santa_Movement : MonoBehaviour
 {
@@ -37,7 +39,7 @@ public class Santa_Movement : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && (dirX != 0 || dirY != 0))
         {
             if(dashCoolCounter <= 0 && dashCounter <= 0)
             {
@@ -67,6 +69,12 @@ public class Santa_Movement : MonoBehaviour
         if(dashCoolCounter > 0)
         {
             dashCoolCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePos = UtilsClass.GetMouseWorldPosition();
+            Vector3 attackDir = (mousePos - transform.position).normalized;
         }
     }
 
