@@ -114,16 +114,26 @@ public class Santa_Movement : MonoBehaviour
         {
             Vector3 mousePos = UtilsClass.GetMouseWorldPosition();
             Vector3 mouseDir = (mousePos - transform.position).normalized;
+
+            CalcAttackDir(mouseDir);
+
             float attackOffset = 3f;
             Vector3 attackPosition = transform.position + mouseDir * attackOffset;
-            Debug.Log(mouseDir);
-
+            Debug.Log(mouseDir.x);
+            //Debug.Log(Mathf.Acos(mouseDir.x) * Mathf.Rad2Deg);
             //state = State.Attacking;
         }
     }
 
-    private void cursorPosition()
+    private void CalcAttackDir(Vector3 mouseDirection)
     {
-
+        if ((mouseDirection.x < 0.5f && mouseDirection.x > -0.5f) && mouseDirection.y > 0.1f)
+        {
+            Debug.Log("Attack Up.");
+        }
+        if ((mouseDirection.x < 0.5f && mouseDirection.x > -0.5f) && mouseDirection.y < 0.1f)
+        {
+            Debug.Log("Attack Down.");
+        }
     }
 }
