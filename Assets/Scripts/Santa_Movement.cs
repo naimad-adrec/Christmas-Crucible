@@ -81,7 +81,7 @@ public class Santa_Movement : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerInput = new Vector2(dirX, dirY).normalized;
-        movement = PlayerInput * activeMoveSpeed;
+        movement = new Vector2(PlayerInput.x * activeMoveSpeed * Time.fixedDeltaTime, PlayerInput.y * activeMoveSpeed * Time.fixedDeltaTime);
         rb.velocity = movement;
 
         if (dirX != 0f || dirY != 0f)
