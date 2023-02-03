@@ -18,6 +18,9 @@ public class Santa_Movement : MonoBehaviour
 
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashLength = 0.5f, dashCooldown = 1f;
+    [SerializeField] private float degreeOne = 0.5736f;
+    [SerializeField] private float degreeTwo = 0.8192f;
+
     private float dashCounter;
     private float dashCoolCounter;
 
@@ -119,7 +122,7 @@ public class Santa_Movement : MonoBehaviour
 
             float attackOffset = 3f;
             Vector3 attackPosition = transform.position + mouseDir * attackOffset;
-            Debug.Log(mouseDir.y);
+            Debug.Log(mouseDir);
             //Debug.Log(Mathf.Acos(mouseDir.x) * Mathf.Rad2Deg);
             //state = State.Attacking;
         }
@@ -127,21 +130,37 @@ public class Santa_Movement : MonoBehaviour
 
     private void CalcAttackDir(Vector3 mouseDirection)
     {
-        if ((mouseDirection.x < 0.6427f && mouseDirection.x > -0.6427f) && mouseDirection.y > 0.1f)
+        if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y > 0.1f)
         {
             Debug.Log("Attack Up.");
         }
-        if ((mouseDirection.x < 0.6427f && mouseDirection.x > -0.6427f) && mouseDirection.y < 0.1f)
+        if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y < 0.1f)
         {
             Debug.Log("Attack Down.");
         }
-        if ((mouseDirection.y < 0.6427f && mouseDirection.y > -0.6427f) && mouseDirection.x > 0.1f)
+        if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x > 0.1f)
         {
             Debug.Log("Attack Right.");
         }
-        if ((mouseDirection.y < 0.6427f && mouseDirection.y > -0.6427f) && mouseDirection.x < 0.1f)
+        if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x < 0.1f)
         {
             Debug.Log("Attack Left.");
+        }
+        if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y > 0.1f)
+        {
+            Debug.Log("Attack Up Right.");
+        }
+        if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y < 0.1f)
+        {
+            Debug.Log("Attack Down Right.");
+        }
+        if ((mouseDirection.y < -degreeOne && mouseDirection.y > -degreeTwo) && mouseDirection.x < 0.1f)
+        {
+            Debug.Log("Attack Down Left.");
+        }
+        if ((mouseDirection.y > degreeOne && mouseDirection.y < degreeTwo) && mouseDirection.x < 0.1f)
+        {
+            Debug.Log("Attack Up Left.");
         }
     }
 }
