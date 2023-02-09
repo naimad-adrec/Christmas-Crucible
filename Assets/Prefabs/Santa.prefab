@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -6863207
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1125419959, guid: ad830381b444343f694b58f8f48b092e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -120,10 +120,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faccc2f4d46764c9080bed2e109a66a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitBoxArea: {fileID: 0}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
   moveSpeed: 6
   dashSpeed: 0
   dashLength: 0.5
   dashCooldown: 1
+  degreeOne: 0.5736
+  degreeTwo: 0.8192
+  attackRange: 0.5
 --- !u!50 &8182815023356306310
 Rigidbody2D:
   serializedVersion: 4

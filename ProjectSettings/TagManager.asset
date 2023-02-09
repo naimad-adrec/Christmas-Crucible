@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - enemyLayers
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
   - name: WalkableGround
     uniqueID: 2441865641
     locked: 0
-  - name: Player
-    uniqueID: 4288104089
+  - name: Buildings
+    uniqueID: 509088819
+    locked: 0
+  - name: People
+    uniqueID: 2546337323
     locked: 0

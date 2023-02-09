@@ -10,8 +10,10 @@ public class Santa_Movement : MonoBehaviour
     private BoxCollider2D coll;
     private Animator anim;
     private SpriteRenderer sp;
+    [SerializeField] private GameObject hitBoxArea;
 
     private enum State { Normal, Attacking };
+    [SerializeField] private LayerMask enemyLayers;
 
     [SerializeField] private float moveSpeed = 5f;
     private float activeMoveSpeed;
@@ -20,6 +22,7 @@ public class Santa_Movement : MonoBehaviour
     [SerializeField] private float dashLength = 0.5f, dashCooldown = 1f;
     [SerializeField] private float degreeOne = 0.5736f;
     [SerializeField] private float degreeTwo = 0.8192f;
+    [SerializeField] private float attackRange = 0.5f;
 
     private float dashCounter;
     private float dashCoolCounter;
@@ -30,6 +33,8 @@ public class Santa_Movement : MonoBehaviour
     private Vector2 PlayerInput;
     private Vector2 movement;
     private State state;
+
+    private Collider2D[] hitEnemies;
 
     void Start()
     {
@@ -122,8 +127,6 @@ public class Santa_Movement : MonoBehaviour
 
             float attackOffset = 3f;
             Vector3 attackPosition = transform.position + mouseDir * attackOffset;
-            Debug.Log(mouseDir);
-            //Debug.Log(Mathf.Acos(mouseDir.x) * Mathf.Rad2Deg);
             //state = State.Attacking;
         }
     }
@@ -132,35 +135,39 @@ public class Santa_Movement : MonoBehaviour
     {
         if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y > 0.1f)
         {
-            Debug.Log("Attack Up.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y + 1.5f), new Vector2 (4f, 1f), 0f, enemyLayers);
         }
         if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y < 0.1f)
         {
-            Debug.Log("Attack Down.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y - 1.5f), new Vector2(4f, 1f), 0f, enemyLayers);
         }
         if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x > 0.1f)
         {
-            Debug.Log("Attack Right.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y), new Vector2(1f, 4f), 0f, enemyLayers);
         }
         if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x < 0.1f)
         {
-            Debug.Log("Attack Left.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y), new Vector2(1f, 4f), 0f, enemyLayers);
         }
         if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y > 0.1f)
         {
-            Debug.Log("Attack Up Right.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y + 1.5f), new Vector2(1f, 4f), 45f, enemyLayers);
         }
         if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y < 0.1f)
         {
-            Debug.Log("Attack Down Right.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y - 1.5f), new Vector2(1f, 4f), 315f, enemyLayers);
         }
         if ((mouseDirection.y < -degreeOne && mouseDirection.y > -degreeTwo) && mouseDirection.x < 0.1f)
         {
-            Debug.Log("Attack Down Left.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y - 1.5f), new Vector2(1f, 4f), 225f, enemyLayers);
         }
         if ((mouseDirection.y > degreeOne && mouseDirection.y < degreeTwo) && mouseDirection.x < 0.1f)
         {
-            Debug.Log("Attack Up Left.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y + 1.5f), new Vector2(1f, 4f), 135f, enemyLayers);
+        }
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("We hit " + enemy.name);
         }
     }
 }
