@@ -10,14 +10,19 @@ public class Santa_Movement : MonoBehaviour
     private BoxCollider2D coll;
     private Animator anim;
     private SpriteRenderer sp;
+    [SerializeField] private GameObject hitBoxArea;
 
     private enum State { Normal, Attacking };
+    [SerializeField] private LayerMask enemyLayers;
 
     [SerializeField] private float moveSpeed = 5f;
     private float activeMoveSpeed;
 
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashLength = 0.5f, dashCooldown = 1f;
+    [SerializeField] private float degreeOne = 0.5736f;
+    [SerializeField] private float degreeTwo = 0.8192f;
+
     private float dashCounter;
     private float dashCoolCounter;
 
@@ -27,6 +32,9 @@ public class Santa_Movement : MonoBehaviour
     private Vector2 PlayerInput;
     private Vector2 movement;
     private State state;
+
+    private Collider2D[] hitEnemies;
+    private Vector2 boxSize = new Vector2(1f, 4f);
 
     void Start()
     {
@@ -60,14 +68,14 @@ public class Santa_Movement : MonoBehaviour
         movement = new Vector2(PlayerInput.x * activeMoveSpeed * Time.fixedDeltaTime, PlayerInput.y * activeMoveSpeed * Time.fixedDeltaTime);
         rb.velocity = movement;
 
-        if (dirX != 0f || dirY != 0f)
-        {
-            anim.SetBool("IsRunning", true);
-        }
-        else
-        {
-            anim.SetBool("IsRunning", false);
-        }
+       // if (dirX != 0f || dirY != 0f)
+       // {
+        //    anim.SetBool("IsRunning", true);
+        //}
+       //else
+        //{
+        //    anim.SetBool("IsRunning", false);
+        //}
     }
 
     private void HandleMovement()
@@ -119,29 +127,47 @@ public class Santa_Movement : MonoBehaviour
 
             float attackOffset = 3f;
             Vector3 attackPosition = transform.position + mouseDir * attackOffset;
-            Debug.Log(mouseDir.y);
-            //Debug.Log(Mathf.Acos(mouseDir.x) * Mathf.Rad2Deg);
             //state = State.Attacking;
         }
     }
 
     private void CalcAttackDir(Vector3 mouseDirection)
     {
-        if ((mouseDirection.x < 0.6427f && mouseDirection.x > -0.6427f) && mouseDirection.y > 0.1f)
+        if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y > 0.1f)
         {
-            Debug.Log("Attack Up.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y + 1.5f), boxSize, 90f, enemyLayers);
         }
-        if ((mouseDirection.x < 0.6427f && mouseDirection.x > -0.6427f) && mouseDirection.y < 0.1f)
+        if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y < 0.1f)
         {
-            Debug.Log("Attack Down.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y - 1.5f), boxSize, 90f, enemyLayers);
         }
-        if ((mouseDirection.y < 0.6427f && mouseDirection.y > -0.6427f) && mouseDirection.x > 0.1f)
+        if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x > 0.1f)
         {
-            Debug.Log("Attack Right.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y), boxSize, 0f, enemyLayers);
         }
-        if ((mouseDirection.y < 0.6427f && mouseDirection.y > -0.6427f) && mouseDirection.x < 0.1f)
+        if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x < 0.1f)
         {
-            Debug.Log("Attack Left.");
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y), boxSize, 0f, enemyLayers);
+        }
+        if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y > 0.1f)
+        {
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y + 1.5f), boxSize, 45f, enemyLayers);
+        }
+        if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y < 0.1f)
+        {
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y - 1.5f), boxSize, 315f, enemyLayers);
+        }
+        if ((mouseDirection.y < -degreeOne && mouseDirection.y > -degreeTwo) && mouseDirection.x < 0.1f)
+        {
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y - 1.5f), boxSize, 225f, enemyLayers);
+        }
+        if ((mouseDirection.y > degreeOne && mouseDirection.y < degreeTwo) && mouseDirection.x < 0.1f)
+        {
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y + 1.5f), boxSize, 135f, enemyLayers);
+        }
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("We hit " + enemy.name);
         }
     }
 }
