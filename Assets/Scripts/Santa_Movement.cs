@@ -35,6 +35,7 @@ public class Santa_Movement : MonoBehaviour
     private State state;
 
     private Collider2D[] hitEnemies;
+    private Vector2 boxSize = new Vector2(1f, 4f);
 
     void Start()
     {
@@ -135,35 +136,35 @@ public class Santa_Movement : MonoBehaviour
     {
         if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y > 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y + 1.5f), new Vector2 (4f, 1f), 0f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y + 1.5f), boxSize, 90f, enemyLayers);
         }
         if ((mouseDirection.x < degreeOne && mouseDirection.x > -degreeOne) && mouseDirection.y < 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y - 1.5f), new Vector2(4f, 1f), 0f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y - 1.5f), boxSize, 90f, enemyLayers);
         }
         if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x > 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y), new Vector2(1f, 4f), 0f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y), boxSize, 0f, enemyLayers);
         }
         if ((mouseDirection.y < degreeOne && mouseDirection.y > -degreeOne) && mouseDirection.x < 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y), new Vector2(1f, 4f), 0f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y), boxSize, 0f, enemyLayers);
         }
         if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y > 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y + 1.5f), new Vector2(1f, 4f), 45f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y + 1.5f), boxSize, 45f, enemyLayers);
         }
         if ((mouseDirection.x > degreeOne && mouseDirection.x < degreeTwo) && mouseDirection.y < 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y - 1.5f), new Vector2(1f, 4f), 315f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 1.5f, transform.position.y - 1.5f), boxSize, 315f, enemyLayers);
         }
         if ((mouseDirection.y < -degreeOne && mouseDirection.y > -degreeTwo) && mouseDirection.x < 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y - 1.5f), new Vector2(1f, 4f), 225f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y - 1.5f), boxSize, 225f, enemyLayers);
         }
         if ((mouseDirection.y > degreeOne && mouseDirection.y < degreeTwo) && mouseDirection.x < 0.1f)
         {
-            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y + 1.5f), new Vector2(1f, 4f), 135f, enemyLayers);
+            hitEnemies = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - 1.5f, transform.position.y + 1.5f), boxSize, 135f, enemyLayers);
         }
         foreach (Collider2D enemy in hitEnemies)
         {
