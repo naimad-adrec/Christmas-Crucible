@@ -40741,6 +40741,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8182815023356306306, guid: ec9138dd1318e4b3bb3465fd819113e0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 808e59d79dd6d41c4a082cfb68d5fe0e, type: 2}
     - target: {fileID: 8182815023356306307, guid: ec9138dd1318e4b3bb3465fd819113e0, type: 3}
       propertyPath: m_Name
       value: Santa

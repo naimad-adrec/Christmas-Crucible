@@ -22,7 +22,6 @@ public class Santa_Movement : MonoBehaviour
     [SerializeField] private float dashLength = 0.5f, dashCooldown = 1f;
     [SerializeField] private float degreeOne = 0.5736f;
     [SerializeField] private float degreeTwo = 0.8192f;
-    [SerializeField] private float attackRange = 0.5f;
 
     private float dashCounter;
     private float dashCoolCounter;
@@ -69,14 +68,14 @@ public class Santa_Movement : MonoBehaviour
         movement = new Vector2(PlayerInput.x * activeMoveSpeed * Time.fixedDeltaTime, PlayerInput.y * activeMoveSpeed * Time.fixedDeltaTime);
         rb.velocity = movement;
 
-        if (dirX != 0f || dirY != 0f)
-        {
-            anim.SetBool("IsRunning", true);
-        }
-        else
-        {
-            anim.SetBool("IsRunning", false);
-        }
+       // if (dirX != 0f || dirY != 0f)
+       // {
+        //    anim.SetBool("IsRunning", true);
+        //}
+       //else
+        //{
+        //    anim.SetBool("IsRunning", false);
+        //}
     }
 
     private void HandleMovement()
